@@ -2,6 +2,10 @@ FROM tensorflow/tensorflow:2.2.0-gpu
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+# Update nvidia signing key.
+RUN apt-key del 7fa2af80
+RUN apt-key adv --fetch-keys $(cut -d \  -f 2 /etc/apt/sources.list.d/cuda.list)/3bf863cc.pub
+
 # Install apt dependencies
 RUN apt-get update && apt-get install -y \
     git \
